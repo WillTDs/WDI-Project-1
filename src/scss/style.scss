@@ -15,10 +15,11 @@ header {
 }
 ///////// MAIN LAYOUT AND GAME WINDOW ////////////
 main {
-
+  width: 660px;
+  margin: 100px auto;
 }
 
-div.window {
+div.gameWindow {
   background-color: white;
   margin: 100px auto;
   text-align: center;
@@ -27,6 +28,13 @@ div.window {
   background-color: #74A4BC;
   border: 5px solid #000fff;
   position: relative;
+}
+
+div.mouseBox {
+  background-color: #fff;
+  height: 537px;
+  width: 50px;
+  float: right;
 }
 //////////// GAME BLOCKS ///////////////////////
 div.blockOne {
@@ -37,7 +45,7 @@ div.blockOne {
     position: absolute;
     text-align: center;
     border: 2px solid red;
-    left: 5%;
+    left: 15%;
 }
 
 div.blockTwo {
@@ -48,7 +56,7 @@ div.blockTwo {
     position: absolute;
     text-align: center;
     border: 2px solid red;
-    left: 35%;
+    left: 40%;
 }
 
 div.blockThree {
@@ -63,15 +71,15 @@ div.blockThree {
 }
 
 .stage-one {
-  animation: move-vertical 4s infinite;
+  animation: move-vertical 4.35s infinite;
 }
 
 .stage-two {
-  animation: move-vertical 2s infinite;
+  animation: move-vertical 2.35s infinite;
 }
 
 .stage-three {
-  animation: move-vertical 1s infinite;
+  animation: move-vertical 1.5s infinite;
 }
 //////////// FOOTER ////////////////////////////
 footer {
