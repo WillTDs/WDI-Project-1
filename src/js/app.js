@@ -6,34 +6,34 @@ $(document).ready(function(){
   //// BLOCK ANIMATION //////////////////////////////////// BROKEN
 
   function blockLoopOne() {
-    $('.blockOne').animate({'top': '500'}, {
-      duration: 1000,
+    $('.blockOne').animate({'top': '87%'}, {
+      duration: 4000,
       complete: function() {
 
-        $('.blockOne').animate({top: 0}, {
-          duration: 1000,
+        $('.blockOne').animate({top: '0%'}, {
+          duration: 4000,
           complete: blockLoopOne});
       }});
   }
 
   function blockLoopTwo() {
-    $('.blockTwo').animate({'top': '500'}, {
-      duration: 2000,
+    $('.blockTwo').animate({'top': '87%'}, {
+      duration: 3000,
       complete: function() {
 
-        $('.blockTwo').animate({top: 0}, {
-          duration: 2000,
+        $('.blockTwo').animate({top: '0%'}, {
+          duration: 3000,
           complete: blockLoopTwo});
       }});
   }
 
   function blockLoopThree() {
-    $('.blockThree').animate({'top': '500'}, {
-      duration: 3000,
+    $('.blockThree').animate({'top': '87%'}, {
+      duration: 1000,
       complete: function() {
 
-        $('.blockThree').animate({top: 0}, {
-          duration: 3000,
+        $('.blockThree').animate({top: '0%'}, {
+          duration: 1000,
           complete: blockLoopThree});
       }});
   }
@@ -65,17 +65,25 @@ $(document).ready(function(){
 
   function checkCollision() {
 
-    const $blockOne = $('.blockOne');
-    const $redline = $('.redline');
+    const $blockOne   = $('.blockOne');
+    const $blockTwo   = $('.blockTwo');
+    const $blockThree = $('.blockThree');
+    const $redline    = $('.redline');
 
-    const redLinePos = $redline.position();
     const blockOne = $blockOne.position();
+    const blockTwo = $blockTwo.position();
+    const blockThree = $blockThree.position();
+    const redLinePos = $redline.position();
 
     const blockOneTop = blockOne.top;
+    const blockTwoTop = blockTwo.top;
+    const blockThreeTop = blockThree.top;
     const redLineBottomPos = redLinePos.top + $redline.height();
 
-    if(blockOneTop <= redLineBottomPos) {
-      console.log('hit');
+    if(blockOneTop <= redLineBottomPos && blockTwoTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
+      console.log('perfect');
+    } else {
+      console.log('nah mate');
     }
   }
 
