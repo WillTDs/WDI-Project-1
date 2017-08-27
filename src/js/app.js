@@ -47,7 +47,7 @@ $(document).ready(function(){
   function line(y) {
     const $redLine = $('<div class="redline" />');
     $('.gameWindow').append($redLine);
-    $redLine.css({ backgroundColor: 'red', width: '660px', height: '3px', top: `${y}px`, position: 'absolute' });
+    $redLine.css({ backgroundColor: 'red', width: '700px', height: '3px', top: `${y}px`, position: 'absolute' });
 
     checkCollision();
   }
@@ -87,5 +87,6 @@ $(document).ready(function(){
     }
   }
 
+  //// AUDIO ////////////////////////////////////////////// BROKEN
 
 });
