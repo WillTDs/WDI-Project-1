@@ -7,33 +7,33 @@ $(document).ready(function(){
 
   function blockLoopOne() {
     $('.blockOne').animate({'top': '87%'}, {
-      duration: 4000,
+      duration: 5000,
       complete: function() {
 
         $('.blockOne').animate({top: '0%'}, {
-          duration: 4000,
+          duration: 5000,
           complete: blockLoopOne});
       }});
   }
 
   function blockLoopTwo() {
     $('.blockTwo').animate({'top': '87%'}, {
-      duration: 3000,
+      duration: 5000,
       complete: function() {
 
         $('.blockTwo').animate({top: '0%'}, {
-          duration: 3000,
+          duration: 5000,
           complete: blockLoopTwo});
       }});
   }
 
   function blockLoopThree() {
     $('.blockThree').animate({'top': '87%'}, {
-      duration: 1000,
+      duration: 5000,
       complete: function() {
 
         $('.blockThree').animate({top: '0%'}, {
-          duration: 1000,
+          duration: 5000,
           complete: blockLoopThree});
       }});
   }
@@ -81,12 +81,59 @@ $(document).ready(function(){
     const redLineBottomPos = redLinePos.top + $redline.height();
 
     if(blockOneTop <= redLineBottomPos && blockTwoTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
-      console.log('perfect');
-    } else {
-      console.log('nah m8');
+      $blockOne.hide();
+      $blockTwo.hide();
+      $blockThree.hide();
+      audio3();
+
+    } else if(blockOneTop <= redLineBottomPos && blockTwoTop <= redLineBottomPos) {
+      $blockOne.hide();
+      $blockTwo.hide();
+      audio2();
+
+    } else if(blockTwoTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
+      $blockTwo.hide();
+      $blockThree.hide();
+      audio2();
+
+    } else if(blockOneTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
+      $blockOne.hide();
+      $blockThree.hide();
+      audio2();
+
+    } else if(blockOneTop <= redLineBottomPos) {
+      $blockOne.hide();
+      audio1();
+
+    } else if(blockTwoTop <= redLineBottomPos) {
+      $blockTwo.hide();
+      audio1();
+
+    } else if(blockThreeTop <= redLineBottomPos) {
+      $blockThree.hide();
+      audio1();
     }
   }
 
   //// AUDIO ////////////////////////////////////////////// BROKEN
+
+  function audio3() {
+    const audioTriple = new Audio('/audio/3punch.wav');
+    const audioWow = new Audio('/audio/wow.wav');
+    audioTriple.play();
+    audioWow.play();
+  }
+
+  function audio2() {
+    const audioPunch = new Audio('/audio/punch.wav');
+    audioPunch.play();
+    audioPunch.play();
+  }
+
+  function audio1() {
+    const audioPunch = new Audio('/audio/punch.wav');
+    audioPunch.play();  
+  }
+
 
 });
