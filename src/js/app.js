@@ -3,7 +3,7 @@ $(document).ready(function(){
   //// GLOBAL VARIABLES ///////////////////////////////////
 
 
-  //// BLOCK ANIMATION //////////////////////////////////// BROKEN
+  //// BLOCK ANIMATION //////////////////////////////////// WORKING
 
   function blockLoopOne() {
     $('.blockOne').animate({'top': '87%'}, {
@@ -61,7 +61,7 @@ $(document).ready(function(){
   document.addEventListener('click', printMousePos);
 
 
-  //// COLLISION DETECTION ///////////////////////////////// BROKEN
+  //// COLLISION DETECTION ///////////////////////////////// WORKING
 
   function checkCollision() {
 
@@ -83,7 +83,7 @@ $(document).ready(function(){
     if(blockOneTop <= redLineBottomPos && blockTwoTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
       console.log('perfect');
     } else {
-      console.log('nah mate');
+      console.log('nah m8');
     }
   }
 
