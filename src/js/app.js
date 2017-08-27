@@ -109,18 +109,16 @@ $(document).ready(function(){
   //     }
 
 
-
-
   function checkCollision() {
 
     const $redline = $('.redline');
     const $blockOne = $('.blockOne');
 
-    const $redLinePos = $redline.position();
+    const redLinePos = $redline.position();
     const blockOne = $blockOne.position();
 
     const blockOneTop = blockOne.top;
-    const redLineBottomPos = $redLinePos.top + $redline.height();
+    const redLineBottomPos = redLinePos.top + $redline.height();
 
     if(blockOneTop <= redLineBottomPos) {
       console.log('hit');

@@ -15,13 +15,13 @@ header {
 }
 ///////// MAIN LAYOUT AND GAME WINDOW ////////////
 main {
-  width: 660px;
+  width: 670px;
   margin: 100px auto;
 }
 
 div.gameWindow {
   background-color: white;
-  margin: 100px auto;
+  margin: 0px auto;
   text-align: center;
   height: 540px;
   width: 660px;
@@ -36,38 +36,60 @@ div.mouseBox {
   width: 50px;
   float: right;
 }
+
+section {
+  background-color: white;
+  padding: 20px 0;
+}
+
+div.scoreboard {
+  float: left;
+  padding-left: 20px;
+  margin: 0;
+}
+
+div.lives {
+  float: right;
+  padding-right: 20px;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
 //////////// GAME BLOCKS ///////////////////////
 div.blockOne {
-    background-color: #fff;
-    color: #000;
+    // background-color: #fff;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCLkHw0ctACyQOIl7O3-CBOtMNBD4264AOEK62GEGTT1vhJ7THYg');
+    background-repeat: no-repeat;
+    background-size: contain;
     width: 70px;
     height: 70px;
     position: absolute;
-    text-align: center;
-    border: 2px solid red;
     left: 15%;
+    border-radius: 20px
 }
 
 div.blockTwo {
-    background-color: #fff;
-    color: #000;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCLkHw0ctACyQOIl7O3-CBOtMNBD4264AOEK62GEGTT1vhJ7THYg');
+    background-repeat: no-repeat;
+    background-size: contain;
     width: 60px;
     height: 60px;
     position: absolute;
-    text-align: center;
-    border: 2px solid red;
     left: 40%;
+    border-radius: 16px;
 }
 
 div.blockThree {
-    background-color: #fff;
-    color: #000;
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCLkHw0ctACyQOIl7O3-CBOtMNBD4264AOEK62GEGTT1vhJ7THYg');
+    background-repeat: no-repeat;
+    background-size: contain;
     width: 50px;
     height: 50px;
     position: absolute;
-    text-align: center;
-    border: 2px solid red;
     left: 65%;
+    border-radius: 14px;
 }
 
 .stage-one {
