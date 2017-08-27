@@ -17,9 +17,9 @@
   <div id="wrap">
     <main>
       <div class="gameWindow">
-        <div class="blockOne">1</div>
-        <div class="blockTwo">2</div>
-        <div class="blockThree">3</div>
+        <div class="blockOne"></div>
+        <div class="blockTwo"></div>
+        <div class="blockThree"></div>
       </div>
       <div class="mouseBox"></div>
     </main>
@@ -29,12 +29,15 @@
         <p id="score">Score:</p>
       </div>
       <div class="lives">
-        <img src="/images/heartfull.png" alt="Heart">
-        <img src="/images/heartfull.png" alt="Heart">
-        <img src="/images/heartfull.png" alt="Heart">
+        <img id="heart1" src="/images/heartfull.png" alt="Heart">
+        <img id="heart2" src="/images/heartfull.png" alt="Heart">
+        <img id="heart3" src="/images/heartfull.png" alt="Heart">
       </div>
     </section>
   </div>
+  <audio id="triple" src="/audio/3punch.wav" preload="auto"></audio>
+  <audio id="punch" src="/audio/punch.wav" preload="auto"></audio>
+  <audio id="wow" src="/audio/wow.wav" preload="auto"></audio>
   <footer>
     <img src="https://seeklogo.com/images/G/general-assembly-logo-D5C634F07A-seeklogo.com.png" alt="GA Logo">
     <h1>William Tye WDI-29</h1>

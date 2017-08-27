@@ -7,22 +7,22 @@ $(document).ready(function(){
 
   function blockLoopOne() {
     $('.blockOne').animate({'top': '87%'}, {
-      duration: 5000,
+      duration: 4000,
       complete: function() {
 
         $('.blockOne').animate({top: '0%'}, {
-          duration: 5000,
+          duration: 4000,
           complete: blockLoopOne});
       }});
   }
 
   function blockLoopTwo() {
     $('.blockTwo').animate({'top': '87%'}, {
-      duration: 5000,
+      duration: 3000,
       complete: function() {
 
         $('.blockTwo').animate({top: '0%'}, {
-          duration: 5000,
+          duration: 3000,
           complete: blockLoopTwo});
       }});
   }
@@ -81,59 +81,89 @@ $(document).ready(function(){
     const redLineBottomPos = redLinePos.top + $redline.height();
 
     if(blockOneTop <= redLineBottomPos && blockTwoTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
+
       $blockOne.hide();
       $blockTwo.hide();
       $blockThree.hide();
-      audio3();
+
+      $('#triple').play();
 
     } else if(blockOneTop <= redLineBottomPos && blockTwoTop <= redLineBottomPos) {
+      // audio2();
       $blockOne.hide();
       $blockTwo.hide();
-      audio2();
+      RemoveOneHeart();
 
     } else if(blockTwoTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
+      // audio2();
       $blockTwo.hide();
       $blockThree.hide();
-      audio2();
+      RemoveOneHeart();
 
     } else if(blockOneTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
+      // audio2();
       $blockOne.hide();
       $blockThree.hide();
-      audio2();
+      RemoveOneHeart();
 
     } else if(blockOneTop <= redLineBottomPos) {
+      // audio1();
       $blockOne.hide();
-      audio1();
+      RemoveTwoHearts();
 
     } else if(blockTwoTop <= redLineBottomPos) {
+      // audio1();
       $blockTwo.hide();
-      audio1();
+      RemoveTwoHearts();
 
     } else if(blockThreeTop <= redLineBottomPos) {
+      // audio1();
       $blockThree.hide();
-      audio1();
+      RemoveTwoHearts();
+
+    } else {
+      RemoveThreeHearts();
     }
+
   }
 
   //// AUDIO ////////////////////////////////////////////// BROKEN
 
-  function audio3() {
-    const audioTriple = new Audio('/audio/3punch.wav');
-    const audioWow = new Audio('/audio/wow.wav');
-    audioTriple.play();
-    audioWow.play();
+  // function audio3() {
+  //   const audioTriple = new Audio('audio/3punch.wav');
+  //   const audioWow = new Audio('audio/wow.wav');
+  //   audioTriple.play();
+  //   audioWow.play();
+  // }
+  //
+  // function audio2() {
+  //   const audioPunch = new Audio('/audio/punch.wav');
+  //   audioPunch.play();
+  //   audioPunch.play();
+  // }
+  //
+  // function audio1() {
+  //   const audioPunch = new Audio('/audio/punch.wav');
+  //   audioPunch.play();
+  // }
+
+  //// HEART DESTROYER //////////////////////////////////////
+
+  function RemoveOneHeart() {
+    $('#heart1').attr('src', '/images/heartempty.png');
   }
 
-  function audio2() {
-    const audioPunch = new Audio('/audio/punch.wav');
-    audioPunch.play();
-    audioPunch.play();
+  function RemoveTwoHearts() {
+    $('#heart1').attr('src', '/images/heartempty.png');
+    $('#heart2').attr('src', '/images/heartempty.png');
   }
 
-  function audio1() {
-    const audioPunch = new Audio('/audio/punch.wav');
-    audioPunch.play();  
+  function RemoveThreeHearts() {
+    $('#heart1').attr('src', '/images/heartempty.png');
+    $('#heart2').attr('src', '/images/heartempty.png');
+    $('#heart3').attr('src', '/images/heartempty.png');
   }
+
 
 
 });
