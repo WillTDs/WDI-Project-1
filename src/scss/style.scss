@@ -92,17 +92,6 @@ div.blockThree {
     border-radius: 14px;
 }
 
-.stage-one {
-  animation: move-vertical 4.35s infinite;
-}
-
-.stage-two {
-  animation: move-vertical 2.35s infinite;
-}
-
-.stage-three {
-  animation: move-vertical 1.5s infinite;
-}
 //////////// FOOTER ////////////////////////////
 footer {
   height: 11%;
@@ -113,10 +102,4 @@ footer {
     color: black;
     text-align: center;
   }
-}
-
-@keyframes move-vertical {
-  0%   { top: 0; }
-  20%  { top: calc(100% - 50px); }
-  100% { top: 0; }
 }

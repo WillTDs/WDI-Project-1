@@ -1,48 +1,55 @@
 $(document).ready(function(){
 
+  //// GLOBAL VARIABLES ///////////////////////////////////
+
 
   //// BLOCK ANIMATION //////////////////////////////////// BROKEN
 
-  // animateDiv();
-  //
-  // });
-  //
-  // function makeNewPosition(){
-  //   const h = $('.window').height() - 50;
-  //   const nh = Math.floor(Math.random() * h);
-  //   return [nh];
-  // }
-  //
-  // function animateDiv(){
-  //   // const mover = makeNewPosition();
-  //   const mover = [0, $('.window').height() - 50];
-  //   $('.blockOne').animate({ top: mover[0], left: 0 }, function(){
-  //     animateDiv();
-  //   });
-  // }
+  function blockLoopOne() {
+    $('.blockOne').animate({'top': '500'}, {
+      duration: 1000,
+      complete: function() {
 
-  //// SHOW COORDINATES OF MOUSE//////////////////////////// BROKEN
+        $('.blockOne').animate({top: 0}, {
+          duration: 1000,
+          complete: blockLoopOne});
+      }});
+  }
 
-  // function showCoords() {
-  //   const x = event.clientX;
-  //   const y = event.clientY;
-  //   const coords = 'x coordinates: ' + x + ', y coordinates: ' + y;
-  //   console.log(coords);
-  // }
-  //
-  // const $mouseBox = $('mouseBox');
-  //
-  // $mouseBox.click(function() {
-  //   // showCoords();
-  //   console.log(window.printMousePos());
-  // });
+  function blockLoopTwo() {
+    $('.blockTwo').animate({'top': '500'}, {
+      duration: 2000,
+      complete: function() {
 
-  //// REDLINE FUNCTION //////////////////////////////////// HALF WORKING
+        $('.blockTwo').animate({top: 0}, {
+          duration: 2000,
+          complete: blockLoopTwo});
+      }});
+  }
+
+  function blockLoopThree() {
+    $('.blockThree').animate({'top': '500'}, {
+      duration: 3000,
+      complete: function() {
+
+        $('.blockThree').animate({top: 0}, {
+          duration: 3000,
+          complete: blockLoopThree});
+      }});
+  }
+
+  blockLoopOne();
+  blockLoopTwo();
+  blockLoopThree();
+
+  //// REDLINE FUNCTION & MOUSE COORDS/////////////////// HALF WORKING
 
   function line(y) {
     const $redLine = $('<div class="redline" />');
     $('.gameWindow').append($redLine);
     $redLine.css({ backgroundColor: 'red', width: '660px', height: '3px', top: `${y}px`, position: 'absolute' });
+
+    checkCollision();
   }
 
   function printMousePos(event) {
@@ -56,63 +63,10 @@ $(document).ready(function(){
 
   //// COLLISION DETECTION ///////////////////////////////// BROKEN
 
-  // var hitList = $('.redline').collision('.blockOne');
-  //
-  // console.log(hitList);
-
-  // function isCollide(a, b) {
-  //   return !(
-  //     ((a.y + a.height) < (b.y)) ||
-  //     (a.y > (b.y + b.height)) ||
-  //     ((a.x + a.width) < b.x) ||
-  //     (a.x > (b.x + b.width))
-  //   );
-  // }
-  //
-  // function rect(obj) {
-  //   return {
-  //     x: parseInt($(obj).css('left')),
-  //     y: parseInt($(obj).css('top')),
-  //     width: $(obj).width(),
-  //     height: $(obj).height()
-  //   };
-  // }
-  //
-  // const a = rect('.redline');
-  // const b = rect('.blockOne');
-  //
-  // console.log(isCollide(a, b));
-  // const $redline = $('redline');
-  // const $blockOne = $('blockOne');
-  //
-  // function checkCollision () {
-  //   const redLinePos = $redline.position();
-  //   const blockOne = $blockOne.position();
-  //   const framePos = $frame.offset();
-  //
-  //   const ballRightPos = ballPos.left + $ball.width();
-  //   const frameTopPos = framePos.top;
-  //   const frameBottomPos = framePos.top + $frame.height();
-  //   const ballTopPos = ballPos.top;
-  //   const ballBottomPos = ballPos.top + $ball.height();
-  //
-  //
-  //   if(ballRightPos >= targetPos.left) {
-  //
-  //     // console.log(ballTopPos >= frameTopPos, ballBottomPos <= frameBottomPos, ballBottomPos, frameBottomPos);
-  //
-  //     if(ballTopPos >= frameTopPos && ballBottomPos <= frameBottomPos) {
-  //       console.log('hit');
-  //       $ball.stop().hide();
-  //     } else {
-  //       console.log('miss');
-  //     }
-
-
   function checkCollision() {
 
-    const $redline = $('.redline');
     const $blockOne = $('.blockOne');
+    const $redline = $('.redline');
 
     const redLinePos = $redline.position();
     const blockOne = $blockOne.position();
@@ -125,5 +79,5 @@ $(document).ready(function(){
     }
   }
 
-  checkCollision();
+
 });
