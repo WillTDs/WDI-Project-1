@@ -122,7 +122,7 @@ div.lives img {
 }
 
 //// GAME BLOCKS ////////////////////////////
-div.blockOne {
+div#blockOne {
   background-image: url('/images/IceCube.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -133,7 +133,7 @@ div.blockOne {
   border-radius: 20px
 }
 
-div.blockTwo {
+div#blockTwo {
   background-image: url('/images/IceCube.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -144,7 +144,7 @@ div.blockTwo {
   border-radius: 20px;
 }
 
-div.blockThree {
+div#blockThree {
   background-image: url('/images/IceCube.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -178,4 +178,29 @@ footer {
     max-width: 100%;
     max-height: 100%;
   }
+}
+
+
+//// MAIN MENU ///////////////////////////////
+
+div.gameWindow.mainMenu {
+  background-image: url('http://www.psdcore.com/tutorial-images/007_step1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  height: 540px;
+  width: 700px;
+  position: relative;
+  display: inline-block;
+  border: 2px solid black;
+}
+
+button.go {
+  font-family: 'Russo One', sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 20px 40px;
+  background-color: white;
+  border-radius: 10px;
+
 }
