@@ -1,10 +1,12 @@
 $(document).ready(function(){
 
   //// GLOBAL VARIABLES ///////////////////////////////////
+  const $level    = $('#level');
+  const $gameOver = $('#gameOver');
+  const $score    = $('#score');
+  const $hScore   = $('#hScore');
 
-  const $score  = $('#score');
-  const $hScore = $('#hScore');
-
+  let lives   = 3;
   let score   = 0;
   let hScore  = 0;
 
@@ -86,49 +88,48 @@ $(document).ready(function(){
     const redLineBottomPos = redLinePos.top + $redline.height();
 
     if(blockOneTop <= redLineBottomPos && blockTwoTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
-
+      audio3();
       $blockOne.hide();
       $blockTwo.hide();
       $blockThree.hide();
       applyScore3();
       applyTopScore();
-      // $('#triple').get[0].play();
 
     } else if(blockOneTop <= redLineBottomPos && blockTwoTop <= redLineBottomPos) {
-      // audio2();
+      audio2();
       $blockOne.hide();
       $blockTwo.hide();
       applyScore2();
       RemoveOneHeart();
 
     } else if(blockTwoTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
-      // audio2();
+      audio2();
       $blockTwo.hide();
       $blockThree.hide();
       applyScore2();
       RemoveOneHeart();
 
     } else if(blockOneTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
-      // audio2();
+      audio2();
       $blockOne.hide();
       $blockThree.hide();
       applyScore2();
       RemoveOneHeart();
 
     } else if(blockOneTop <= redLineBottomPos) {
-      // audio1();
+      audio1();
       $blockOne.hide();
       applyScore1();
       RemoveTwoHearts();
 
     } else if(blockTwoTop <= redLineBottomPos) {
-      // audio1();
+      audio1();
       $blockTwo.hide();
       applyScore1();
       RemoveTwoHearts();
 
     } else if(blockThreeTop <= redLineBottomPos) {
-      // audio1();
+      audio1();
       $blockThree.hide();
       applyScore1();
       RemoveTwoHearts();
@@ -137,44 +138,56 @@ $(document).ready(function(){
       RemoveThreeHearts();
     }
 
-
   }
 
-  //// AUDIO ////////////////////////////////////////////// BROKEN
+  //// AUDIO /////////////////////// GULP NOT ACCEPTING AUDIO FOLDER
 
-  // function audio3() {
-  //   const audioTriple = new Audio('audio/3punch.wav');
-  //   const audioWow = new Audio('audio/wow.wav');
-  //   audioTriple.play();
-  //   audioWow.play();
-  // }
-  //
-  // function audio2() {
-  //   const audioPunch = new Audio('/audio/punch.wav');
-  //   audioPunch.play();
-  //   audioPunch.play();
-  // }
-  //
-  // function audio1() {
-  //   const audioPunch = new Audio('/audio/punch.wav');
-  //   audioPunch.play();
-  // }
+  function audio3() {
+    const audioTriple = new Audio('audio/3punch.wav');
+    const audioWow = new Audio('audio/wow.wav');
+    audioTriple.play();
+    audioWow.play();
+  }
 
-  //// HEART DESTROYER ///////////////////////////////////// WORKING
+  function audio2() {
+    const audioPunch = new Audio('/audio/punch.wav');
+    audioPunch.play();
+    audioPunch.play();
+  }
+
+  function audio1() {
+    const audioPunch = new Audio('/audio/punch.wav');
+    audioPunch.play();
+  }
+
+  //// HEART DESTROYER ///////////////////////////////////// HALF WORKING
+
+  function lifeCheck(){
+    if(lives === 0){
+      $gameOver.text('Game Over');
+    }
+  }
+
 
   function RemoveOneHeart() {
     $('#heart1').attr('src', '/images/heartempty.png');
+    lives -= 1;
+    lifeCheck();
   }
 
   function RemoveTwoHearts() {
     $('#heart1').attr('src', '/images/heartempty.png');
     $('#heart2').attr('src', '/images/heartempty.png');
+    lives -= 2;
+    lifeCheck();
   }
 
   function RemoveThreeHearts() {
     $('#heart1').attr('src', '/images/heartempty.png');
     $('#heart2').attr('src', '/images/heartempty.png');
     $('#heart3').attr('src', '/images/heartempty.png');
+    lives -= 3;
+    lifeCheck();
   }
 
   //// SCORING /////////////////////////////////////////////// HALF WORKING
@@ -207,6 +220,26 @@ $(document).ready(function(){
   // }
 
 
+
+  /// Level Loader /////////////////////////////////////// BROKEN
+
+  // function mainMenu(){
+  //
+  // }
+  //
+  function levelOne(){
+    $level.html('Level 1');
+  }
+  //
+  // function levelTwo(){
+  //  $level.html('Level 2');
+  // }
+  //
+  // function levelThree(){
+  //  $level.html('Level 3');
+  // }
+
+  levelOne();
   applyTopScore();
 
 });

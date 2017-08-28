@@ -1,30 +1,47 @@
 
-
+//// GENERAL STYLES /////////////////////////
 body {
-  background-image:url('https://www.walldevil.com/wallpapers/a81/blue-background-sky-islands-beaches-wallpapers-water-twitter-pictures-images-art-nature-backgrounds-wallpaper-unique-ocean-media-island.jpg');
+  background-image:url('/images/skybackground.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
 }
-///////// HEADER ////////////////////////////////
+//// HEADER /////////////////////////////////
 header {
   height: 11%;
-  // background-color: white;
   margin: 40px;
-  margin-bottom: 100px;
+  margin-bottom: 80px;
   clear: both;
-  h1 {
-    font-family: 'Stalinist One', cursive;
-    margin: 0;
-    color: white;
-    text-align: center;
-  }
 }
-///////// MAIN LAYOUT AND GAME WINDOW ////////////
+
+header h1 {
+  font-family: 'Stalinist One', cursive;
+  margin: 0;
+  color: white;
+  text-align: center;
+}
+//// MAIN LAYOUT AND GAME WINDOW ////////////
 #wrap {
   margin: 50px auto;
   max-width: 750px;
   text-align: center;
+}
+
+h1#level {
+  font-family: 'Russo One', sans-serif;
+  margin: 0;
+  font-size: 20px;
+  text-align: left;
+  color: #fff;
+  padding: 10px;
+}
+
+h1#gameOver {
+  font-family: 'Stalinist One', cursive;
+  text-align: center;
+  font-size: 35px;
+  margin-top: 25%;
+  color: #fff;
 }
 
 section #board {
@@ -57,7 +74,7 @@ div.mouseBox {
   float: right;
   border: 2px solid black;
 }
-////// SCOREBOARD AND LIFE COUNTER //////////
+//// SCOREBOARD AND LIFE COUNTER ////////////
 section {
   height: 90px;
 }
@@ -72,9 +89,20 @@ div.scoreboard {
 }
 
 div.scoreboard p {
-  padding: 10px 0 0 10px;
-  font-size: 14px;
+  padding-left: 10px;
+  font-size: 20px;
   text-align: left;
+}
+
+p#score{
+  font-family: 'Russo One', sans-serif;
+  margin: 0;
+}
+
+p#hScore{
+  font-family: 'Russo One', sans-serif;
+  margin: 0;
+  padding-top: 5px;
 }
 
 div.lives {
@@ -85,7 +113,6 @@ div.lives {
   height: 90px;
   margin: 0;
   padding: 0;
-
 }
 
 div.lives img {
@@ -94,25 +121,15 @@ div.lives img {
   max-height: 100%;
 }
 
-p#score{
-  font-family: 'Stalinist One', cursive;
-  margin: 0;
-}
-
-p#hScore{
-  font-family: 'Stalinist One', cursive;
-  margin: 0;
-}
-//////////// GAME BLOCKS ///////////////////////
+//// GAME BLOCKS ////////////////////////////
 div.blockOne {
-  // background-color: #fff;
   background-image: url('/images/IceCube.png');
   background-repeat: no-repeat;
   background-size: contain;
   width: 70px;
   height: 70px;
   position: absolute;
-  left: 15%;
+  left: 145px;
   border-radius: 20px
 }
 
@@ -123,7 +140,7 @@ div.blockTwo {
   width: 70px;
   height: 70px;
   position: absolute;
-  left: 40%;
+  left: 327px;
   border-radius: 20px;
 }
 
@@ -134,11 +151,10 @@ div.blockThree {
   width: 70px;
   height: 70px;
   position: absolute;
-  left: 65%;
+  left: 510px;
   border-radius: 20px;
 }
-
-//////////// FOOTER ////////////////////////////
+//// FOOTER /////////////////////////////////
 footer {
   position: relative;
   margin: 0 auto;
