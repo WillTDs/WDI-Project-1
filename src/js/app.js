@@ -2,27 +2,38 @@ $(document).ready(function(){
 
   //// GLOBAL VARIABLES ///////////////////////////////////
 
-  const $level      = $('#level');
+  // const $level      = $('#level');
   const $gameOver   = $('#gameOver');
   const $score      = $('#score');
   const $hScore     = $('#hScore');
   const $startBtn   = $('.startBtn');
-  const $p          = $('p');
+  const $restartBtn = $('restart');
+  // const $p          = $('p');
   const $mainMenu   = $('.mainMenu');
   const $mouseBox   = $('.mouseBox');
   const $gameWindow = $('.gameWindow');
   const $blocks     = $('.blocks');
-  const levels = {
+  const levels      = {
     '1': [5000, 3000],
     '2': [5000, 4000, 3000],
-    '3': [5000, 3500, 2000, 1500]
+    '3': [5000, 3500, 2000, 1500],
+    '4': [5000, 4000, 3000, 2000, 1000]
   };
 
-  let lives            = 3;
-  let score            = 0;
-  let hScore           = 0;
+  let heart1 = true;
+  let heart2 = true;
+  let lives   = 3;
+  let score   = 0;
+  let hScore  = 0;
 
-  //// BLOCK CREATOR //////////////////////////////////////
+  //// INITILISATION ///////////////////////////////////// BROKEN
+
+  function gameInit() {
+    mainMenu();
+    applyTopScore();
+  }
+
+  //// BLOCK CREATOR ////////////////////////////////////// WORKING
 
   function generateBlocks(numberToGenerate) {
     const blockAmount = levels[`${numberToGenerate}`]; // pulling the correct level array from levels object
@@ -58,7 +69,7 @@ $(document).ready(function(){
       }});
   }
 
-  //// REDLINE FUNCTION & MOUSE COORDS/////////////////// HALF WORKING
+  //// REDLINE FUNCTION & MOUSE COORDS///////////////////// WORKING
 
   function line(y) {
     const $redLine = $('<div class="redline" />');
@@ -75,7 +86,7 @@ $(document).ready(function(){
 
   $mouseBox.on('click', printMousePos);
 
-  //// COLLISION DETECTION ///////////////////////////////// WORKING
+  //// COLLISION DETECTION ///////////////////////////////// ALMOST WORKING
 
   function checkCollision() {
 
@@ -84,51 +95,34 @@ $(document).ready(function(){
     const redLinePos = $redline.offset();
 
     $blocks.each((i, block) => {
-      const blockPos = $(block).offset();
-      blockPos.bottom = $(block).height() + blockPos.top;
+
+      const blockPos    = $(block).offset();
+      blockPos.bottom   = $(block).height() + blockPos.top;
       redLinePos.bottom = $redline.height() + redLinePos.top;
+
       if(blockPos.top <= redLinePos.bottom && redLinePos.top <= blockPos.bottom){
         $(block).addClass('collided');
       }
 
-      const hitAmount  = $(block).filter('.collided').length;
-      const missAmount = $(block).not('.collided').length;
+      console.log($(block).filter('.collided').length);
+      console.log($(block).not('.collided').length);
 
-      console.log(hitAmount);
-      console.log(missAmount);
-
-      if ($(block).hasClass('collided')){
+      if($(block).hasClass('collided')){
         applyScore();
         applyTopScore();
         $(block).remove();
-      } else {
-        removeHeart();
-        lifeCheck();
+      } else if(heart1 === true) {
+        removeHeart1();
+      } else if(heart1 === false) {
+        removeHeart2();
+      } else if(heart2 === false) {
+        removeHeart3();
       }
+
 
     });
 
   }
-
-  //// AUDIO /////////////////////// GULP NOT ACCEPTING AUDIO FOLDER
-
-  // function audio3() {
-  //   const audioTriple = new Audio('audio/3punch.wav');
-  //   const audioWow = new Audio('audio/wow.wav');
-  //   audioTriple.play();
-  //   audioWow.play();
-  // }
-  //
-  // function audio2() {
-  //   const audioPunch = new Audio('/audio/punch.wav');
-  //   audioPunch.play();
-  //   audioPunch.play();
-  // }
-  //
-  // function audio1() {
-  //   const audioPunch = new Audio('/audio/punch.wav');
-  //   audioPunch.play();
-  // }
 
   //// HEART DESTROYER /////////////////////////////// HALF WORKING
 
@@ -139,13 +133,28 @@ $(document).ready(function(){
     }
   }
 
-  function removeHeart() {
+  function removeHeart1() {
     $('#heart1').attr('src', '/images/heartempty.png');
+    console.log('1 has run');
+    heart1 = false;
+    lives -= 1;
+    lifeCheck();
+  }
+  function removeHeart2() {
+    $('#heart2').attr('src', '/images/heartempty.png');
+    console.log('2 has run');
+    heart2 = false;
+    lives -= 1;
+    lifeCheck();
+  }
+  function removeHeart3() {
+    $('#heart3').attr('src', '/images/heartempty.png');
+    console.log('3 has run');
     lives -= 1;
     lifeCheck();
   }
 
-  //// SCORING //////////////////////////////////////// HALF WORKING
+  //// SCORING //////////////////////////////////////// WORKING
 
   function applyScore() {
     score += 50;
@@ -164,43 +173,65 @@ $(document).ready(function(){
     $score.text(score);
   }
 
-  /// Level Loader /////////////////////////////////////// BROKEN
+  //// AUDIO /////////////////// GULP NOT ACCEPTING AUDIO FOLDER
+
+  // function audio3() {
+  //   const audioTriple = new Audio('audio/3punch.wav');
+  //   const audioWow = new Audio('audio/wow.wav');
+  //   audioTriple.play();
+  //   audioWow.play();
+  // }
+  //
+  // function audio2() {
+  //   const audioPunch = new Audio('/audio/punch.wav');
+  //   audioPunch.play();
+  //   audioPunch.play();
+  // }
+  //
+  // function audio1() {
+  //   const audioPunch = new Audio('/audio/punch.wav');
+  //   audioPunch.play();
+  // }
+  // function audio4() {
+  //   const audioYeah = new Audio('/audio/ohyeah.wav');
+  //   audioYeah.play();
+  // }
+
+  /// RESTART BUTTON ///////////////////////////////////// BROKEN
+
+  $restartBtn.click(function() {
+    resetScore();
+    mainMenu();
+  });
+
+  /// LEVEL LOADER /////////////////////////////////////// WORKING
 
   function mainMenu(){
     resetScore();
     $startBtn.click(levelOne);
+    // audio4();
   }
 
   function levelOne(){
     $mainMenu.hide();
-    $level.html('Level 1');
-    $startBtn.hide();
-    $p.hide();
-
     generateBlocks(1);
   }
-
   // function levelTwo(){
-  //  $level.html('Level 2');
+  //   $level.html('Level 2');
+  //   generateBlocks(2);
   // }
-  //
   // function levelThree(){
-  //  $level.html('Level 3');
+  //   $level.html('Level 3');
+  //   generateBlocks(3);
+  // }
+  // function levelFour(){
+  //   $level.html('Level 4');
+  //   generateBlocks(4);
   // }
 
-  // function mainMenu(){
-  //   resetScore();
-  //   $startBtn.click(function() {
-  //     levelOne();
-  //   });
-  // }
 
-  mainMenu();
-  // levelOne();
-  applyTopScore();
-  // $startBtn.hide();
-  // $p.hide();
-
-  ///////////////
+  /////////////////////////////////////////////////////////
+  
+  gameInit();
 
 });
