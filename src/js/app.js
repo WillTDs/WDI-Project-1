@@ -13,8 +13,9 @@ $(document).ready(function(){
   const $gameWindow = $('.gameWindow');
   const $blocks     = $('.blocks');
   const levels = {
-    '1': [7000, 6000, 5000],
-    '2': [7000, 6000, 5000, 4000, 3000]
+    '1': [5000, 3000],
+    '2': [5000, 4000, 3000],
+    '3': [5000, 3500, 2000, 1500]
   };
 
   let lives            = 3;
@@ -25,14 +26,14 @@ $(document).ready(function(){
 
   function generateBlocks(numberToGenerate) {
     const blockAmount = levels[`${numberToGenerate}`]; // pulling the correct level array from levels object
-    let numberOfBlocks = blockAmount.length; // finding length of array (number of blocks to generate)
+    let blockArrLength = blockAmount.length; // finding length of array (number of blocks to generate)
 
     $blocks.empty();
-    while (numberOfBlocks--){
+    while (blockArrLength--){
       const html = `
-        <li>
-          <div class="block"></div>
-        </li>
+      <li>
+        <div class="block"></div>
+      </li>
       `;
       const $block = $(html);
       $blocks.append($block);
@@ -57,47 +58,12 @@ $(document).ready(function(){
       }});
   }
 
-
-  // function blockLoopOne() {
-  //   $blocks.find('li:nth-child(1) .block').animate({'top': '87%'}, {
-  //     duration: 6000,
-  //     complete: function() {
-  //
-  //       $blocks.find('li:nth-child(1) .block').animate({top: '0%'}, {
-  //         duration: 6000,
-  //         complete: blockLoopOne});
-  //     }});
-  // }
-  //
-  // function blockLoopTwo() {
-  //   $('#blockTwo').animate({'top': '87%'}, {
-  //     duration: 3000,
-  //     complete: function() {
-  //
-  //       $('#blockTwo').animate({top: '0%'}, {
-  //         duration: 3000,
-  //         complete: blockLoopTwo});
-  //     }});
-  // }
-  //
-  // function blockLoopThree() {
-  //   $('#blockThree').animate({'top': '87%'}, {
-  //     duration: 1500,
-  //     complete: function() {
-  //
-  //       $('#blockThree').animate({top: '0%'}, {
-  //         duration: 1500,
-  //         complete: blockLoopThree});
-  //     }});
-  // }
-
   //// REDLINE FUNCTION & MOUSE COORDS/////////////////// HALF WORKING
 
   function line(y) {
     const $redLine = $('<div class="redline" />');
     $gameWindow.append($redLine);
     $redLine.css({ backgroundColor: 'red', width: '700px', height: '3px', top: `${y}px`, position: 'absolute' });
-
     checkCollision();
   }
 
@@ -113,70 +79,34 @@ $(document).ready(function(){
 
   function checkCollision() {
 
-    const $blockOne   = $('#blockOne');
-    const $blockTwo   = $('#blockTwo');
-    const $blockThree = $('#blockThree');
-    const $allBlocks  = $('.block');
-    const $redline    = $('.redline');
+    const $redline   = $('.redline');
+    const $blocks    = $('.block');
+    const redLinePos = $redline.offset();
 
-    const blockOne = $blockOne.position();
-    const blockTwo = $blockTwo.position();
-    const blockThree = $blockThree.position();
-    const redLinePos = $redline.position();
+    $blocks.each((i, block) => {
+      const blockPos = $(block).offset();
+      blockPos.bottom = $(block).height() + blockPos.top;
+      redLinePos.bottom = $redline.height() + redLinePos.top;
+      if(blockPos.top <= redLinePos.bottom && redLinePos.top <= blockPos.bottom){
+        $(block).addClass('collided');
+      }
 
-    const blockOneTop = blockOne.top;
-    const blockTwoTop = blockTwo.top;
-    const blockThreeTop = blockThree.top;
-    const redLineBottomPos = redLinePos.top + $redline.height();
+      const hitAmount  = $(block).filter('.collided').length;
+      const missAmount = $(block).not('.collided').length;
 
-    if(blockOneTop <= redLineBottomPos && blockTwoTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
-      // audio3();
-      $allBlocks.hide();
-      applyScore3();
-      applyTopScore();
+      console.log(hitAmount);
+      console.log(missAmount);
 
-    } else if(blockOneTop <= redLineBottomPos && blockTwoTop <= redLineBottomPos) {
-      // audio2();
-      $blockOne.hide();
-      $blockTwo.hide();
-      applyScore2();
-      RemoveOneHeart();
+      if ($(block).hasClass('collided')){
+        applyScore();
+        applyTopScore();
+        $(block).remove();
+      } else {
+        removeHeart();
+        lifeCheck();
+      }
 
-    } else if(blockTwoTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
-      // audio2();
-      $blockTwo.hide();
-      $blockThree.hide();
-      applyScore2();
-      RemoveOneHeart();
-
-    } else if(blockOneTop <= redLineBottomPos && blockThreeTop <= redLineBottomPos) {
-      // audio2();
-      $blockOne.hide();
-      $blockThree.hide();
-      applyScore2();
-      RemoveOneHeart();
-
-    } else if(blockOneTop <= redLineBottomPos) {
-      // audio1();
-      $blockOne.hide();
-      applyScore1();
-      RemoveTwoHearts();
-
-    } else if(blockTwoTop <= redLineBottomPos) {
-      // audio1();
-      $blockTwo.hide();
-      applyScore1();
-      RemoveTwoHearts();
-
-    } else if(blockThreeTop <= redLineBottomPos) {
-      // audio1();
-      $blockThree.hide();
-      applyScore1();
-      RemoveTwoHearts();
-
-    } else {
-      RemoveThreeHearts();
-    }
+    });
 
   }
 
@@ -209,38 +139,15 @@ $(document).ready(function(){
     }
   }
 
-  function RemoveOneHeart() {
+  function removeHeart() {
     $('#heart1').attr('src', '/images/heartempty.png');
     lives -= 1;
     lifeCheck();
   }
 
-  function RemoveTwoHearts() {
-    $('#heart1').attr('src', '/images/heartempty.png');
-    $('#heart2').attr('src', '/images/heartempty.png');
-    lives -= 2;
-    lifeCheck();
-  }
-
-  function RemoveThreeHearts() {
-    $('.heart').attr('src', '/images/heartempty.png');
-    lives -= 3;
-    lifeCheck();
-  }
-
   //// SCORING //////////////////////////////////////// HALF WORKING
 
-  function applyScore3() {
-    score += 150;
-    $score.text('Score: ' + score);
-  }
-
-  function applyScore2() {
-    score += 100;
-    $score.text('Score: ' + score);
-  }
-
-  function applyScore1() {
+  function applyScore() {
     score += 50;
     $score.text('Score: ' + score);
   }
