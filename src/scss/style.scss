@@ -65,6 +65,24 @@ div.gameWindow {
   position: relative;
   display: inline-block;
   border: 2px solid black;
+  // display: flex;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    li {
+      min-width: 70px;
+      background-color: grey;
+      height: 100%;
+    }
+  }
 }
 
 div.mouseBox {
@@ -122,38 +140,38 @@ div.lives img {
 }
 
 //// GAME BLOCKS ////////////////////////////
-div#blockOne {
+div.block {
   background-image: url('/images/IceCube.png');
   background-repeat: no-repeat;
   background-size: contain;
   width: 70px;
   height: 70px;
   position: absolute;
-  left: 145px;
-  border-radius: 20px
+  border-radius: 20px;
+  // justify-content: space-around;
 }
 
-div#blockTwo {
-  background-image: url('/images/IceCube.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 70px;
-  height: 70px;
-  position: absolute;
-  left: 327px;
-  border-radius: 20px;
-}
-
-div#blockThree {
-  background-image: url('/images/IceCube.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 70px;
-  height: 70px;
-  position: absolute;
-  left: 510px;
-  border-radius: 20px;
-}
+// div#blockTwo {
+//   background-image: url('/images/IceCube.png');
+//   background-repeat: no-repeat;
+//   background-size: contain;
+//   width: 70px;
+//   height: 70px;
+//   position: absolute;
+//   left: 327px;
+//   border-radius: 20px;
+// }
+//
+// div#blockThree {
+//   background-image: url('/images/IceCube.png');
+//   background-repeat: no-repeat;
+//   background-size: contain;
+//   width: 70px;
+//   height: 70px;
+//   position: absolute;
+//   left: 510px;
+//   border-radius: 20px;
+// }
 //// FOOTER /////////////////////////////////
 footer {
   position: relative;
@@ -183,24 +201,31 @@ footer {
 
 //// MAIN MENU ///////////////////////////////
 
-div.gameWindow.mainMenu {
+div.mainMenu {
   background-image: url('http://www.psdcore.com/tutorial-images/007_step1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
   height: 540px;
-  width: 700px;
+  width: 750px;
   position: relative;
   display: inline-block;
   border: 2px solid black;
+  position: absolute;
+  z-index: 10;
 }
 
-button.go {
+button.startBtn {
   font-family: 'Russo One', sans-serif;
   font-size: 20px;
   text-decoration: none;
   padding: 20px 40px;
   background-color: white;
   border-radius: 10px;
+}
 
+.gameWindow p {
+  font-family: 'Russo One', sans-serif;
+  font-size: 32px;
+  color: white;
 }

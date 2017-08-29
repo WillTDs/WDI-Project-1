@@ -1,25 +1,48 @@
 $(document).ready(function(){
 
   //// GLOBAL VARIABLES ///////////////////////////////////
-  const $level    = $('#level');
-  const $gameOver = $('#gameOver');
-  const $score    = $('#score');
-  const $hScore   = $('#hScore');
-  const $go       = $('.go');
 
-  let lives   = 3;
-  let score   = 0;
-  let hScore  = 0;
+  const $level      = $('#level');
+  const $gameOver   = $('#gameOver');
+  const $score      = $('#score');
+  const $hScore     = $('#hScore');
+  const $startBtn   = $('.startBtn');
+  const $p          = $('p');
+  const $mainMenu   = $('.mainMenu');
+  const $mouseBox   = $('.mouseBox');
+  const $gameWindow = $('.gameWindow');
+  const $blocks     = $('.blocks');
+
+  // let numberToGenerate = 1;
+  let lives            = 3;
+  let score            = 0;
+  let hScore           = 0;
+
+  //// BLOCK CREATOR //////////////////////////////////////
+
+  function generateBlocks(numberToGenerate) {
+    console.log('in here');
+    $blocks.empty();
+    while (numberToGenerate--){
+      const html = `
+        <li>
+          <div class="block"></div>
+        </li>
+      `;
+      const $block = $(html);
+      $blocks.append($block);
+    }
+  }
 
   //// BLOCK ANIMATION //////////////////////////////////// WORKING
 
   function blockLoopOne() {
-    $('#blockOne').animate({'top': '87%'}, {
-      duration: 5000,
+    $blocks.find('li:nth-child(1) .block').animate({'top': '87%'}, {
+      duration: 6000,
       complete: function() {
 
-        $('#blockOne').animate({top: '0%'}, {
-          duration: 5000,
+        $blocks.find('li:nth-child(1) .block').animate({top: '0%'}, {
+          duration: 6000,
           complete: blockLoopOne});
       }});
   }
@@ -37,18 +60,14 @@ $(document).ready(function(){
 
   function blockLoopThree() {
     $('#blockThree').animate({'top': '87%'}, {
-      duration: 1000,
+      duration: 1500,
       complete: function() {
 
         $('#blockThree').animate({top: '0%'}, {
-          duration: 1000,
+          duration: 1500,
           complete: blockLoopThree});
       }});
   }
-
-  blockLoopOne();
-  blockLoopTwo();
-  blockLoopThree();
 
   //// REDLINE FUNCTION & MOUSE COORDS/////////////////// HALF WORKING
 
@@ -66,11 +85,7 @@ $(document).ready(function(){
     line(y);
   }
 
-  function mouseClick() {
-    document.addEventListener('click', printMousePos);
-  }
-
-  mouseClick();
+  $mouseBox.on('click', printMousePos);
 
   //// COLLISION DETECTION ///////////////////////////////// WORKING
 
@@ -224,22 +239,21 @@ $(document).ready(function(){
 
   function mainMenu(){
     resetScore();
-    $('.gameWindow').addClass('mainMenu');
-    $('.block').hide();
-    $('.redLine').hide();
-    $go.click(function() {
-      console.log('hello');
-      levelOne();
-    });
+    $startBtn.click(levelOne);
   }
 
   function levelOne(){
+    $mainMenu.hide();
     $level.html('Level 1');
-    $('.block').show();
-    $('div.gameWindow.mainMenu').removeClass('mainMenu');
-    $go.hide();
+    $startBtn.hide();
+    $p.hide();
+
+    generateBlocks(5);
+    blockLoopOne();
+    blockLoopTwo();
+    blockLoopThree();
   }
-  //
+
   // function levelTwo(){
   //  $level.html('Level 2');
   // }
@@ -248,7 +262,19 @@ $(document).ready(function(){
   //  $level.html('Level 3');
   // }
 
-  // mainMenu();
+  // function mainMenu(){
+  //   resetScore();
+  //   $startBtn.click(function() {
+  //     levelOne();
+  //   });
+  // }
+
+  mainMenu();
+  // levelOne();
   applyTopScore();
-  $go.hide();
+  // $startBtn.hide();
+  // $p.hide();
+
+  ///////////////
+
 });
