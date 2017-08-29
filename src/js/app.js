@@ -12,8 +12,11 @@ $(document).ready(function(){
   const $mouseBox   = $('.mouseBox');
   const $gameWindow = $('.gameWindow');
   const $blocks     = $('.blocks');
+  const levels = {
+    '1': [7000, 6000, 5000],
+    '2': [7000, 6000, 5000, 4000, 3000]
+  };
 
-  // let numberToGenerate = 1;
   let lives            = 3;
   let score            = 0;
   let hScore           = 0;
@@ -21,9 +24,11 @@ $(document).ready(function(){
   //// BLOCK CREATOR //////////////////////////////////////
 
   function generateBlocks(numberToGenerate) {
-    console.log('in here');
+    const blockAmount = levels[`${numberToGenerate}`]; // pulling the correct level array from levels object
+    let numberOfBlocks = blockAmount.length; // finding length of array (number of blocks to generate)
+
     $blocks.empty();
-    while (numberToGenerate--){
+    while (numberOfBlocks--){
       const html = `
         <li>
           <div class="block"></div>
@@ -32,48 +37,65 @@ $(document).ready(function(){
       const $block = $(html);
       $blocks.append($block);
     }
+
+    // animate blocks
+    blockAmount.forEach(blockLoop);
   }
 
   //// BLOCK ANIMATION //////////////////////////////////// WORKING
 
-  function blockLoopOne() {
-    $blocks.find('li:nth-child(1) .block').animate({'top': '87%'}, {
-      duration: 6000,
+  function blockLoop(duration, blockIndex) {
+    $blocks.find(`li:nth-child(${blockIndex+1}) .block`).animate({'top': '87%'}, {
+      duration,
       complete: function() {
 
-        $blocks.find('li:nth-child(1) .block').animate({top: '0%'}, {
-          duration: 6000,
-          complete: blockLoopOne});
+        $blocks.find(`li:nth-child(${blockIndex+1}) .block`).animate({top: '0%'}, {
+          duration,
+          complete: function() {
+            blockLoop(duration, blockIndex);
+          }});
       }});
   }
 
-  function blockLoopTwo() {
-    $('#blockTwo').animate({'top': '87%'}, {
-      duration: 3000,
-      complete: function() {
 
-        $('#blockTwo').animate({top: '0%'}, {
-          duration: 3000,
-          complete: blockLoopTwo});
-      }});
-  }
-
-  function blockLoopThree() {
-    $('#blockThree').animate({'top': '87%'}, {
-      duration: 1500,
-      complete: function() {
-
-        $('#blockThree').animate({top: '0%'}, {
-          duration: 1500,
-          complete: blockLoopThree});
-      }});
-  }
+  // function blockLoopOne() {
+  //   $blocks.find('li:nth-child(1) .block').animate({'top': '87%'}, {
+  //     duration: 6000,
+  //     complete: function() {
+  //
+  //       $blocks.find('li:nth-child(1) .block').animate({top: '0%'}, {
+  //         duration: 6000,
+  //         complete: blockLoopOne});
+  //     }});
+  // }
+  //
+  // function blockLoopTwo() {
+  //   $('#blockTwo').animate({'top': '87%'}, {
+  //     duration: 3000,
+  //     complete: function() {
+  //
+  //       $('#blockTwo').animate({top: '0%'}, {
+  //         duration: 3000,
+  //         complete: blockLoopTwo});
+  //     }});
+  // }
+  //
+  // function blockLoopThree() {
+  //   $('#blockThree').animate({'top': '87%'}, {
+  //     duration: 1500,
+  //     complete: function() {
+  //
+  //       $('#blockThree').animate({top: '0%'}, {
+  //         duration: 1500,
+  //         complete: blockLoopThree});
+  //     }});
+  // }
 
   //// REDLINE FUNCTION & MOUSE COORDS/////////////////// HALF WORKING
 
   function line(y) {
     const $redLine = $('<div class="redline" />');
-    $('.gameWindow').append($redLine);
+    $gameWindow.append($redLine);
     $redLine.css({ backgroundColor: 'red', width: '700px', height: '3px', top: `${y}px`, position: 'absolute' });
 
     checkCollision();
@@ -248,10 +270,7 @@ $(document).ready(function(){
     $startBtn.hide();
     $p.hide();
 
-    generateBlocks(5);
-    blockLoopOne();
-    blockLoopTwo();
-    blockLoopThree();
+    generateBlocks(1);
   }
 
   // function levelTwo(){
