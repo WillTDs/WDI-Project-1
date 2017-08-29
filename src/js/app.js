@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   //// GLOBAL VARIABLES ///////////////////////////////////
 
-  // const $level      = $('#level');
+  const $level      = $('#level');
   const $gameOver   = $('#gameOver');
   const $score      = $('#score');
   const $hScore     = $('#hScore');
@@ -159,6 +159,15 @@ $(document).ready(function(){
   function applyScore() {
     score += 50;
     $score.text('Score: ' + score);
+    if(score === 100) {
+      levelTwo();
+    } else if(score === 250) {
+      levelThree();
+    } else if(score === 450) {
+      levelFour();
+    } else if(score > 550) {
+      $gameWindow.html('CONGRATULATIONS');
+    }
   }
 
   function applyTopScore() {
@@ -214,24 +223,41 @@ $(document).ready(function(){
 
   function levelOne(){
     $mainMenu.hide();
+    $level.html('Level 1');
+    lives = 3;
     generateBlocks(1);
   }
-  // function levelTwo(){
-  //   $level.html('Level 2');
-  //   generateBlocks(2);
-  // }
-  // function levelThree(){
-  //   $level.html('Level 3');
-  //   generateBlocks(3);
-  // }
-  // function levelFour(){
-  //   $level.html('Level 4');
-  //   generateBlocks(4);
-  // }
+  function levelTwo(){
+    $level.html('Level 2');
+    $('.redline').remove();
+    $('#heart1').attr('src', '/images/heartfull.png');
+    $('#heart2').attr('src', '/images/heartfull.png');
+    $('#heart3').attr('src', '/images/heartfull.png');
+    lives = 3;
+    generateBlocks(2);
+  }
+  function levelThree(){
+    $level.html('Level 3');
+    $('.redline').remove();
+    $('#heart1').attr('src', '/images/heartfull.png');
+    $('#heart2').attr('src', '/images/heartfull.png');
+    $('#heart3').attr('src', '/images/heartfull.png');
+    lives = 3;
+    generateBlocks(3);
+  }
+  function levelFour(){
+    $level.html('Level 4');
+    $('.redline').remove();
+    $('#heart1').attr('src', '/images/heartfull.png');
+    $('#heart2').attr('src', '/images/heartfull.png');
+    $('#heart3').attr('src', '/images/heartfull.png');
+    lives = 3;
+    generateBlocks(4);
+  }
 
 
   /////////////////////////////////////////////////////////
-  
+
   gameInit();
 
 });
