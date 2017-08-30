@@ -7,24 +7,25 @@ $(document).ready(function(){
   const $score      = $('#score');
   const $hScore     = $('#hScore');
   const $startBtn   = $('.startBtn');
+  const $nextLevel  = $('.nextLevel');
   const $restartBtn = $('restart');
-  // const $p          = $('p');
+  const $hearts     = $('.heart');
   const $mainMenu   = $('.mainMenu');
   const $mouseBox   = $('.mouseBox');
   const $gameWindow = $('.gameWindow');
   const $blocks     = $('.blocks');
+
   const levels      = {
     '1': [5000, 3000],
-    '2': [5000, 4000, 3000],
-    '3': [5000, 3500, 2000, 1500],
-    '4': [5000, 4000, 3000, 2000, 1000]
+    '2': [4000, 2000, 5000],
+    '3': [5000, 4000, 2000, 1000],
+    '4': [5000, 3000, 1500, 3000, 5000]
   };
 
-  let heart1 = true;
-  let heart2 = true;
-  let lives   = 3;
-  let score   = 0;
-  let hScore  = 0;
+  let lives        = 3;
+  let score        = 0;
+  let hScore       = 0;
+  let currentLevel = 1;
 
   //// INITILISATION ///////////////////////////////////// BROKEN
 
@@ -72,9 +73,11 @@ $(document).ready(function(){
   //// REDLINE FUNCTION & MOUSE COORDS///////////////////// WORKING
 
   function line(y) {
+    console.log('adding new red line at level:', currentLevel);
     const $redLine = $('<div class="redline" />');
     $gameWindow.append($redLine);
-    $redLine.css({ backgroundColor: 'red', width: '700px', height: '3px', top: `${y}px`, position: 'absolute' });
+    $redLine.css({ backgroundColor: 'red', width: '700px', height: '6px', top: `${y}px`, position: 'absolute' });
+    audioLaser();
     checkCollision();
   }
 
@@ -95,80 +98,57 @@ $(document).ready(function(){
     const redLinePos = $redline.offset();
 
     $blocks.each((i, block) => {
-
+      console.log('block check!');
       const blockPos    = $(block).offset();
       blockPos.bottom   = $(block).height() + blockPos.top;
       redLinePos.bottom = $redline.height() + redLinePos.top;
 
-      if(blockPos.top <= redLinePos.bottom && redLinePos.top <= blockPos.bottom){
+      if(blockPos.top <= redLinePos.top && redLinePos.bottom <= blockPos.bottom){
+        console.log('collided!');
         $(block).addClass('collided');
       }
 
-      console.log($(block).filter('.collided').length);
-      console.log($(block).not('.collided').length);
-
       if($(block).hasClass('collided')){
-        applyScore();
+        score += 50;
+        $score.text('Score: ' + score);
         applyTopScore();
         $(block).remove();
-      } else if(heart1 === true) {
-        removeHeart1();
-      } else if(heart1 === false) {
-        removeHeart2();
-      } else if(heart2 === false) {
-        removeHeart3();
+      } else {
+        lives--;
       }
-
-
     });
 
-  }
+    if($('.block').length === 0){
+      currentLevel++;
+      $nextLevel.show();
+    }
 
-  //// HEART DESTROYER /////////////////////////////// HALF WORKING
-
-  function lifeCheck() {
+    $hearts.slice(0, 3 - lives).attr('src', '/images/heartempty.png');
     if(lives === 0){
       $gameOver.hide().text('Game Over').fadeIn(1000);
       $('.block').fadeOut(1000);
     }
+
   }
 
-  function removeHeart1() {
-    $('#heart1').attr('src', '/images/heartempty.png');
-    console.log('1 has run');
-    heart1 = false;
-    lives -= 1;
-    lifeCheck();
+  function newLevel(){
+    audioWow();
+    levelChange();
+    $nextLevel.hide();
   }
-  function removeHeart2() {
-    $('#heart2').attr('src', '/images/heartempty.png');
-    console.log('2 has run');
-    heart2 = false;
-    lives -= 1;
-    lifeCheck();
-  }
-  function removeHeart3() {
-    $('#heart3').attr('src', '/images/heartempty.png');
-    console.log('3 has run');
-    lives -= 1;
-    lifeCheck();
-  }
+
+  $nextLevel.find('button').on('click', newLevel);
+
+
+  //// HEART DESTROYER /////////////////////////////// HALF WORKING
+
+  // function repHearts() {
+  //   $('#heart1').attr('src', '/images/heartfull.png');
+  //   $('#heart2').attr('src', '/images/heartfull.png');
+  //   $('#heart3').attr('src', '/images/heartfull.png');
+  // }
 
   //// SCORING //////////////////////////////////////// WORKING
-
-  function applyScore() {
-    score += 50;
-    $score.text('Score: ' + score);
-    if(score === 100) {
-      levelTwo();
-    } else if(score === 250) {
-      levelThree();
-    } else if(score === 450) {
-      levelFour();
-    } else if(score > 550) {
-      $gameWindow.html('CONGRATULATIONS');
-    }
-  }
 
   function applyTopScore() {
     if(score > hScore) {
@@ -184,27 +164,36 @@ $(document).ready(function(){
 
   //// AUDIO /////////////////// GULP NOT ACCEPTING AUDIO FOLDER
 
-  // function audio3() {
+  // function audio3Punch() {
   //   const audioTriple = new Audio('audio/3punch.wav');
-  //   const audioWow = new Audio('audio/wow.wav');
   //   audioTriple.play();
-  //   audioWow.play();
+  //
   // }
   //
-  // function audio2() {
+  // function audio2Punch() {
   //   const audioPunch = new Audio('/audio/punch.wav');
   //   audioPunch.play();
   //   audioPunch.play();
   // }
   //
-  // function audio1() {
+  // function audioPunch() {
   //   const audioPunch = new Audio('/audio/punch.wav');
   //   audioPunch.play();
   // }
-  // function audio4() {
-  //   const audioYeah = new Audio('/audio/ohyeah.wav');
-  //   audioYeah.play();
-  // }
+  function audioYeh() {
+    const audioYeah = new Audio('/audio/ohyeah.wav');
+    audioYeah.play();
+  }
+
+  function audioWow() {
+    const audioWow = new Audio('audio/wow.wav');
+    audioWow.play();
+  }
+
+  function audioLaser() {
+    const audioLaser = new Audio('audio/laserbeam.wav');
+    audioLaser.play();
+  }
 
   /// RESTART BUTTON ///////////////////////////////////// BROKEN
 
@@ -217,44 +206,19 @@ $(document).ready(function(){
 
   function mainMenu(){
     resetScore();
-    $startBtn.click(levelOne);
+    $startBtn.click(() => {
+      audioYeh();
+      $mainMenu.hide();
+      levelChange();
+    });
+  }
+
+  function levelChange(){
+    $level.html(`Level ${currentLevel}`);
+    $('.redline').remove();
+    generateBlocks(currentLevel);
     // audio4();
   }
-
-  function levelOne(){
-    $mainMenu.hide();
-    $level.html('Level 1');
-    lives = 3;
-    generateBlocks(1);
-  }
-  function levelTwo(){
-    $level.html('Level 2');
-    $('.redline').remove();
-    $('#heart1').attr('src', '/images/heartfull.png');
-    $('#heart2').attr('src', '/images/heartfull.png');
-    $('#heart3').attr('src', '/images/heartfull.png');
-    lives = 3;
-    generateBlocks(2);
-  }
-  function levelThree(){
-    $level.html('Level 3');
-    $('.redline').remove();
-    $('#heart1').attr('src', '/images/heartfull.png');
-    $('#heart2').attr('src', '/images/heartfull.png');
-    $('#heart3').attr('src', '/images/heartfull.png');
-    lives = 3;
-    generateBlocks(3);
-  }
-  function levelFour(){
-    $level.html('Level 4');
-    $('.redline').remove();
-    $('#heart1').attr('src', '/images/heartfull.png');
-    $('#heart2').attr('src', '/images/heartfull.png');
-    $('#heart3').attr('src', '/images/heartfull.png');
-    lives = 3;
-    generateBlocks(4);
-  }
-
 
   /////////////////////////////////////////////////////////
 

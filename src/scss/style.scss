@@ -153,7 +153,6 @@ div.lives img {
   max-height: 48px;
 }
 
-
 //// GAME BLOCKS ////////////////////////////
 div.block {
   background-image: url('/images/IceCube.png');
@@ -206,6 +205,29 @@ div.mainMenu {
   border: 2px solid black;
   position: absolute;
   z-index: 10;
+}
+
+div.nextLevel {
+  text-align: center;
+  position: relative;
+  display: block;
+  position: absolute;
+  z-index: 10;
+  padding: 20px;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+div.nextLevel button {
+  font-family: 'Russo One', sans-serif;
+  font-size: 20px;
+  text-decoration: none;
+  padding: 15px 10px;
+  background-color: white;
+  border-radius: 10px;
 }
 
 button.startBtn {
