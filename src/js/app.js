@@ -16,10 +16,11 @@ $(document).ready(function(){
   const $blocks     = $('.blocks');
 
   const levels      = {
-    '1': [5000, 3000],
+    '1': [3000, 2000],
     '2': [4000, 2000, 5000],
     '3': [5000, 4000, 2000, 1000],
-    '4': [5000, 3000, 1500, 3000, 5000]
+    '4': [5000, 3000, 1500, 3000, 5000],
+    '5': [1200, 3300, 5100, 3000, 2600, 800]
   };
 
   let lives        = 3;
@@ -175,6 +176,10 @@ $(document).ready(function(){
   $('select').on('change', (e)=> {
     audio.src = $(e.target).val();
     audio.play();
+  });
+
+  $('#mute').on('click', ()=> {
+    audio.pause();
   });
 
   /// RESTART BUTTON ///////////////////////////////////// BROKEN
