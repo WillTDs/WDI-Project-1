@@ -139,15 +139,6 @@ $(document).ready(function(){
 
   $nextLevel.find('button').on('click', newLevel);
 
-
-  //// HEART DESTROYER /////////////////////////////// HALF WORKING
-
-  // function repHearts() {
-  //   $('#heart1').attr('src', '/images/heartfull.png');
-  //   $('#heart2').attr('src', '/images/heartfull.png');
-  //   $('#heart3').attr('src', '/images/heartfull.png');
-  // }
-
   //// SCORING //////////////////////////////////////// WORKING
 
   function applyTopScore() {
@@ -164,36 +155,27 @@ $(document).ready(function(){
 
   //// AUDIO /////////////////// GULP NOT ACCEPTING AUDIO FOLDER
 
-  // function audio3Punch() {
-  //   const audioTriple = new Audio('audio/3punch.wav');
-  //   audioTriple.play();
-  //
-  // }
-  //
-  // function audio2Punch() {
-  //   const audioPunch = new Audio('/audio/punch.wav');
-  //   audioPunch.play();
-  //   audioPunch.play();
-  // }
-  //
-  // function audioPunch() {
-  //   const audioPunch = new Audio('/audio/punch.wav');
-  //   audioPunch.play();
-  // }
   function audioYeh() {
-    const audioYeah = new Audio('/audio/ohyeah.wav');
-    audioYeah.play();
+    const audioYeahSound = new Audio('/audio/ohyeah.wav');
+    audioYeahSound.play();
   }
 
   function audioWow() {
-    const audioWow = new Audio('audio/wow.wav');
-    audioWow.play();
+    const audioWowSound = new Audio('/audio/wow.wav');
+    audioWowSound.play();
   }
 
   function audioLaser() {
-    const audioLaser = new Audio('audio/laserbeam.wav');
-    audioLaser.play();
+    const audioLaserSound = new Audio('/audio/laserbeam.wav');
+    audioLaserSound.play();
   }
+
+  const audio = $('#mainTrack')[0];
+
+  $('select').on('change', (e)=> {
+    audio.src = $(e.target).val();
+    audio.play();
+  });
 
   /// RESTART BUTTON ///////////////////////////////////// BROKEN
 

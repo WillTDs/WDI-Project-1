@@ -10,7 +10,7 @@ body {
 header {
   height: 11%;
   margin: 40px;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   clear: both;
 }
 
@@ -22,7 +22,7 @@ header h1 {
 }
 //// MAIN LAYOUT AND GAME WINDOW ////////////
 #wrap {
-  margin: 50px auto;
+  margin: 10px auto;
   max-width: 750px;
   text-align: center;
 }
@@ -153,6 +153,28 @@ div.lives img {
   max-height: 48px;
 }
 
+.musicText select {
+  // margin-left: 10px;
+  margin-bottom: 10px;
+  font-family: 'Russo One', sans-serif;
+  font-size: 16px;
+}
+
+.musicText {
+  width: 100%;
+  margin: 0 auto;
+  font-family: 'Russo One', sans-serif;
+  font-size: 16px;
+  color: white;
+  line-height: 4px;
+  display: inline-block;
+  display: flex;
+  justify-content: center;
+}
+
+option {
+    text-align: center;
+}
 //// GAME BLOCKS ////////////////////////////
 div.block {
   background-image: url('/images/IceCube.png');
