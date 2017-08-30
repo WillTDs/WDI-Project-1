@@ -15,25 +15,14 @@
   <header>
     <h1>ONE CLICK WONDER</h1>
   </header>
-  <div class="musicText">
-    <audio id="mainTrack"></audio>
-    <select>
-      <option selected="true" disabled>Select your music</option>
-      <option value="/audio/Survivor8bit.mp3">Survivor - Destiny's Child</option>
-      <option value="/audio/FeelGood.mp3">Feel Good Inc - Gorillaz</option>
-      <option value="/audio/NoScrubs.mp3">No Scrubs - TLC</option>
-      <option value="/audio/sandstorm.mp3">Sandstorm - Darude</option>
-      <option value="/audio/BarbieGirl.mp3">Barbie Girl - Aqua</option>
-    </select>
-    <button id="mute" type="button" name="mute"></button>
-  </div>
   <div id="wrap">
     <main>
       <div class="mainMenu">
         <h2>Instructions</h2>
         <p>Click on the white box on the right to fire a line across the window</p>
-        <p>Time your click so the line pierces as many boxes as possible</p>
-        <p>Destroy them all to clear the level.</p>
+        <p>Time your click so the line pierces as many blocks as possible</p>
+        <p>You lose a life for every block left on the screen after your click</p>
+        <p>Destroy them all to clear the level</p>
         <button class="startBtn">Go</button>
       </div>
       <div class="nextLevel"><button>Next level</button></div>
@@ -48,6 +37,18 @@
       <div class="scoreboard">
         <p id="hScore">High Score:</p>
         <p id="score">Score:</p>
+      </div>
+      <div class="musicText">
+        <audio id="mainTrack"></audio>
+        <select>
+          <option selected="true" disabled>Select your music</option>
+          <option value="/audio/Survivor8bit.mp3">Survivor - Destiny's Child</option>
+          <option value="/audio/FeelGood.mp3">Feel Good Inc - Gorillaz</option>
+          <option value="/audio/NoScrubs.mp3">No Scrubs - TLC</option>
+          <option value="/audio/sandstorm.mp3">Sandstorm - Darude</option>
+          <option value="/audio/BarbieGirl.mp3">Barbie Girl - Aqua</option>
+        </select>
+        <button id="mute" type="button" name="mute"></button>
       </div>
       <input type="button" class="restart" value="restart">
       <div class="lives">
