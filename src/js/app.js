@@ -63,10 +63,16 @@ $(document).ready(function(){
   function blockLoop(duration, blockIndex) {
     $blocks.find(`li:nth-child(${blockIndex+1}) .block`).animate({'top': '87%'}, {
       duration,
+      specialEasing: {
+        top: 'linear'
+      },
       complete: function() {
 
         $blocks.find(`li:nth-child(${blockIndex+1}) .block`).animate({top: '0%'}, {
           duration,
+          specialEasing: {
+            top: 'linear'
+          },
           complete: function() {
             blockLoop(duration, blockIndex);
           }});
@@ -106,7 +112,9 @@ $(document).ready(function(){
       blockPos.bottom   = $(block).height() + blockPos.top;
       redLinePos.bottom = $redline.height() + redLinePos.top;
 
-      if(blockPos.top <= redLinePos.top && redLinePos.bottom >= blockPos.bottom){
+      if(redLinePos.bottom <= blockPos.bottom === false) console.log('top:', blockPos.top <= redLinePos.top, 'bottom: ', redLinePos.bottom <= blockPos.bottom, 'dif', Math.round(Math.abs(redLinePos.bottom - blockPos.bottom)));
+
+      if(blockPos.top <= redLinePos.top && redLinePos.bottom <= blockPos.bottom){
         console.log('collided!');
         $(block).addClass('collided');
       }

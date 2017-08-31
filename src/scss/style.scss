@@ -1,5 +1,10 @@
 
 //// GENERAL STYLES /////////////////////////
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   background-image:url('/images/skybackground.jpg');
   background-repeat: no-repeat;
@@ -80,7 +85,6 @@ div.gameWindow {
     left: 0;
     li {
       min-width: 70px;
-      // background-color: grey;
       height: 100%;
     }
   }
@@ -280,4 +284,26 @@ button.startBtn {
   font-size: 32px;
   color: white;
   text-decoration: underline;
+}
+
+////////////////////////////////////////////////////////////////
+
+@media only screen and (max-width: 640px) {
+  body {
+    max-width: 640px;
+    width: 100%;
+    max-height: 100%;
+  }
+
+  .gamewindow {
+    max-width: 80%;
+  }
+
+  .mainMenu {
+    max-width: 80%;
+  }
+
+  .mouseBox {
+    max-width: 10%;
+  }
 }
