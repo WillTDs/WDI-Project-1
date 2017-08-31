@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background-image:url('/images/skybackground.jpg');
+  background-image:url('../images/skybackground.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0;
@@ -70,7 +70,7 @@ main {
 }
 
 div.gameWindow {
-  background-image: url('/images/blueblackfade.png');
+  background-image: url('../images/blueblackfade.png');
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
@@ -178,7 +178,7 @@ div.lives img {
 }
 
 #mute {
-  background-image: url('/images/mute.png');
+  background-image: url('../images/mute.png');
   background-repeat: no-repeat;
   background-color: white;
   background-size: 50px;
@@ -194,7 +194,7 @@ option {
 }
 //// GAME BLOCKS ////////////////////////////
 div.block {
-  background-image: url('/images/IceCube.png');
+  background-image: url('../images/IceCube.png');
   background-repeat: no-repeat;
   background-size: contain;
   width: 70px;
@@ -235,7 +235,7 @@ footer {
 //// MAIN MENU ///////////////////////////////
 
 div.mainMenu {
-  background-image: url('/images/probackground.jpg');
+  background-image: url('../images/probackground.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
