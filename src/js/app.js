@@ -138,7 +138,7 @@ $(document).ready(function(){
       $nextLevel.show();
     }
 
-    $hearts.slice(0, 3 - lives).attr('src', '/images/heartempty.png');
+    $hearts.slice(0, 3 - lives).attr('src', '/public/images/heartempty.png');
     if(lives <= 0){
       audioFail();
       $('.block').fadeOut({ duration: 1000, queue: false });
@@ -165,27 +165,27 @@ $(document).ready(function(){
   //// AUDIO //////////////////////////////////////////
 
   function audioYeh() {
-    const audioYeahSound = new Audio('/public/audio/ohyeah.wav');
+    const audioYeahSound = new Audio('/public/audio//ohyeah.wav');
     audioYeahSound.play();
   }
 
   function audioBeep() {
-    const audioBeepSound = new Audio('/public/audio/beep.mp3');
+    const audioBeepSound = new Audio('/public/audio//beep.mp3');
     audioBeepSound.play();
   }
 
   function audioLaser() {
-    const audioLaserSound = new Audio('/public/audiolaserbeam.wav');
+    const audioLaserSound = new Audio('/public/audio/laserbeam.wav');
     audioLaserSound.play();
   }
 
   function audioFail() {
-    const audioFailSound = new Audio('/public/audiofail.mp3');
+    const audioFailSound = new Audio('/public/audio/fail.mp3');
     audioFailSound.play();
   }
 
   function audioCheer() {
-    const audioCheerSound = new Audio('/public/audiocheer.wav');
+    const audioCheerSound = new Audio('/public/audio/cheer.wav');
     audioCheerSound.play();
   }
 
@@ -206,7 +206,7 @@ $(document).ready(function(){
     $gameOver.hide();
     $redLine.hide();
     $mainMenu.show();
-    $hearts.attr('src', '/images/heartfull.png');
+    $hearts.attr('src', '/public/images/heartfull.png');
     lives = 3;
     currentLevel = 1;
     mainMenu();
