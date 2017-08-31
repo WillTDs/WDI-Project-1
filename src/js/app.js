@@ -87,7 +87,7 @@ $(document).ready(function(){
     const $redLine = $('<div class="redline" />');
     $newLine = $redLine;
     $gameWindow.append($redLine);
-    $redLine.css({ backgroundColor: 'red', width: '700px', height: '6px', top: `${y}px`, position: 'absolute' });
+    $redLine.css({ backgroundColor: 'red', width: '100%', height: '1.2%', top: `${y}px`, position: 'absolute' });
     audioLaser();
     checkCollision();
   }
