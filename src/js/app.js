@@ -16,6 +16,7 @@ $(document).ready(function(){
   const $gameWindow = $('.gameWindow');
   const $blocks     = $('.blocks');
   const audio       = $('#mainTrack')[0];
+  let $newLine    = null;
 
   const levels      = {
     '1': [3000, 2000],
@@ -84,6 +85,7 @@ $(document).ready(function(){
   function line(y) {
     console.log('adding new red line at level:', currentLevel);
     const $redLine = $('<div class="redline" />');
+    $newLine = $redLine;
     $gameWindow.append($redLine);
     $redLine.css({ backgroundColor: 'red', width: '700px', height: '6px', top: `${y}px`, position: 'absolute' });
     audioLaser();
@@ -102,7 +104,7 @@ $(document).ready(function(){
 
   function checkCollision() {
 
-    const $redline   = $('.redline');
+    const $redline   = $newLine;
     const $blocks    = $('.block');
     const redLinePos = $redline.offset();
 
@@ -114,7 +116,7 @@ $(document).ready(function(){
 
       if(redLinePos.bottom <= blockPos.bottom === false) console.log('top:', blockPos.top <= redLinePos.top, 'bottom: ', redLinePos.bottom <= blockPos.bottom, 'dif', Math.round(Math.abs(redLinePos.bottom - blockPos.bottom)));
 
-      if(blockPos.top <= redLinePos.top && redLinePos.bottom <= blockPos.bottom){
+      if(blockPos.top <= redLinePos.top && redLinePos.bottom <= blockPos.bottom) {
         console.log('collided!');
         $(block).addClass('collided');
       }
@@ -137,11 +139,11 @@ $(document).ready(function(){
     }
 
     $hearts.slice(0, 3 - lives).attr('src', '/images/heartempty.png');
-    if(lives === 0){
-      $redline.remove();
+    if(lives <= 0){
       audioFail();
+      $('.block').fadeOut({ duration: 1000, queue: false });
       $gameOver.text('Game Over').hide().fadeIn(1000);
-      $('.block').fadeOut(1000);
+      $redline.fadeOut(1000);
     }
 
   }
@@ -238,5 +240,4 @@ $(document).ready(function(){
   /////////////////////////////////////////////////////////
 
   gameInit();
-
 });
