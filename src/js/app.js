@@ -170,7 +170,7 @@ $(document).ready(function(){
   }
 
   function audioBeep() {
-    const audioBeepSound = new Audio('/audio/beep.wav');
+    const audioBeepSound = new Audio('/audio/beep.mp3');
     audioBeepSound.play();
   }
 
