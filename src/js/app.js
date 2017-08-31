@@ -165,27 +165,27 @@ $(document).ready(function(){
   //// AUDIO //////////////////////////////////////////
 
   function audioYeh() {
-    const audioYeahSound = new Audio('/audio/ohyeah.wav');
+    const audioYeahSound = new Audio('/public/audio/ohyeah.wav');
     audioYeahSound.play();
   }
 
   function audioBeep() {
-    const audioBeepSound = new Audio('/audio/beep.mp3');
+    const audioBeepSound = new Audio('/public/audio/beep.mp3');
     audioBeepSound.play();
   }
 
   function audioLaser() {
-    const audioLaserSound = new Audio('/audio/laserbeam.wav');
+    const audioLaserSound = new Audio('/public/audiolaserbeam.wav');
     audioLaserSound.play();
   }
 
   function audioFail() {
-    const audioFailSound = new Audio('/audio/fail.mp3');
+    const audioFailSound = new Audio('/public/audiofail.mp3');
     audioFailSound.play();
   }
 
   function audioCheer() {
-    const audioCheerSound = new Audio('/audio/cheer.wav');
+    const audioCheerSound = new Audio('/public/audiocheer.wav');
     audioCheerSound.play();
   }
 
