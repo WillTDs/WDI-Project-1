@@ -16,29 +16,30 @@ $(document).ready(function(){
   const $gameWindow = $('.gameWindow');
   const $blocks     = $('.blocks');
   const audio       = $('#mainTrack')[0];
-  let $newLine    = null;
 
   const levels      = {
-    '1': [3000, 2000],
+    '1': [4000, 3000],
     '2': [4000, 2000, 5000],
     '3': [5000, 4000, 2000, 1000],
     '4': [5000, 3000, 1500, 3000, 5000],
-    '5': [1200, 3300, 5100, 3000, 2600, 800]
+    '5': [1200, 3300, 5100, 3000, 2600, 800],
+    '6': [800, 2100, 1300, 2700, 700, 1850, 900]
   };
 
   let lives        = 3;
   let score        = 0;
   let hScore       = 0;
   let currentLevel = 1;
+  let $newLine     = null;
 
-  //// INITILISATION /////////////////////////////////////
+  //// INITILISATION //////////////////////////////////
 
   function gameInit() {
     mainMenu();
     applyTopScore();
   }
 
-  //// BLOCK CREATOR //////////////////////////////////////
+  //// BLOCK CREATOR //////////////////////////////////
 
   function generateBlocks(numberToGenerate) {
     const blockAmount = levels[`${numberToGenerate}`]; // pulling the correct level array from levels object
@@ -59,7 +60,7 @@ $(document).ready(function(){
     blockAmount.forEach(blockLoop);
   }
 
-  //// BLOCK ANIMATION ////////////////////////////////////
+  //// BLOCK ANIMATION ////////////////////////////////
 
   function blockLoop(duration, blockIndex) {
     $blocks.find(`li:nth-child(${blockIndex+1}) .block`).animate({'top': '87%'}, {
@@ -80,7 +81,7 @@ $(document).ready(function(){
       }});
   }
 
-  //// REDLINE FUNCTION & MOUSE COORDS/////////////////////
+  //// REDLINE FUNCTION & MOUSE COORDS/////////////////
 
   function line(y) {
     console.log('adding new red line at level:', currentLevel);
@@ -100,7 +101,7 @@ $(document).ready(function(){
 
   $mouseBox.on('click', printMousePos);
 
-  //// COLLISION DETECTION ///////////////////////////////// ALMOST WORKING
+  //// COLLISION DETECTION ////////////////////////////
 
   function checkCollision() {
 
@@ -165,12 +166,12 @@ $(document).ready(function(){
   //// AUDIO //////////////////////////////////////////
 
   function audioYeh() {
-    const audioYeahSound = new Audio('/public/audio//ohyeah.wav');
+    const audioYeahSound = new Audio('/public/audio/ohyeah.wav');
     audioYeahSound.play();
   }
 
   function audioBeep() {
-    const audioBeepSound = new Audio('/public/audio//beep.mp3');
+    const audioBeepSound = new Audio('/public/audio/beep.mp3');
     audioBeepSound.play();
   }
 
@@ -198,7 +199,7 @@ $(document).ready(function(){
     audio.pause();
   });
 
-  /// RESTART BUTTON ///////////////////////////////////// BROKEN
+  /// RESTART BUTTON /////////////////////////////////////
 
   $restartBtn.click(() => {
     resetScore();
@@ -212,7 +213,7 @@ $(document).ready(function(){
     mainMenu();
   });
 
-  /// LEVEL LOADER /////////////////////////////////////// WORKING
+  /// LEVEL LOADER ///////////////////////////////////////
 
   function mainMenu(){
     resetScore();
@@ -237,7 +238,7 @@ $(document).ready(function(){
 
   $nextLevel.find('button').on('click', newLevel);
 
-  /////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////
 
   gameInit();
 });
