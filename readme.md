@@ -2,6 +2,7 @@
 # ONE CLICK WONDER
 
 ![Main Menu Screenshot](https://s26.postimg.org/gnbgkaxgp/Screen_Shot_2017-09-01_at_09.52.08.png)
+
 [View the game here](https://oneclickwonder.herokuapp.com/)
 
 ### INSTALLATION AND SETUP
@@ -36,7 +37,7 @@ Software languages used-
 
 ### CHALLENGES
 
-The main challenge I encountered during the creation of the game was the collision between the redline and the blocks. It occasionally would not register a hit seemingly at random, however after rewriting the function several times I finally managed to to hit upon a better collision solution.
+The main challenge I encountered during the creation of the game was the collision between the redline and the blocks. It occasionally would not register a hit seemingly at random, however after rewriting the function several times I finally managed to to hit upon a better collision solution. Mobile optimisation was also tricky, if I was to start over I would build for mobile first then add responsive design for desktop after. I had to make some quite alot of styling changes to make it suitable for a smaller screen.
 
 ### IMPROVEMENTS
 
